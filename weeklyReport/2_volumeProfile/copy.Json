@@ -1,0 +1,5 @@
+cpiBtcPct = (btc_cpi.close[-1]/btc_cpi.close[0]-1)*100
+cpiEthPct = (eth_cpi.close[-1]/eth_cpi.close[0]-1)*100
+cpiEvent = pd.DataFrame({'cpiJan2023': ('cpiActual', 'cpiForecast', 'afterTwoDayBtcPctChange', 'afterTwoDayEthPctChange'),
+'cpiEffect': (cpiDf['Actual'].iloc[-1], cpiDf['Forecast'].iloc[-1], str(round(cpiBtcPct, 2))+"%", str(round(cpiEthPct, 2))+"%")
+})
