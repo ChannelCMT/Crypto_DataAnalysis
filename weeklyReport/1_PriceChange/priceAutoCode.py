@@ -21,7 +21,7 @@ class priceChangeData():
         dataResetDf = dataHourDf.reset_index()
         return dataResetDf
 
-    def addSymbol(self, dataDf, symbolName):  
+    def addSymbol(self, dataDf, symbolName): 
         dataDf['symbol'] = symbolName
         return dataDf
 
@@ -31,7 +31,6 @@ class priceChangeData():
 
 if __name__ == '__main__':
     getData = priceChangeData()
-    print(sys.argv)
     startTime = datetime.strptime(sys.argv[1], '%Y-%m-%d')
     endTime = datetime.strptime(sys.argv[2], '%Y-%m-%d')
     symbolList = ['btc_usdt.spot:binance', 'eth_usdt.spot:binance']
@@ -48,7 +47,7 @@ if __name__ == '__main__':
         hourIndexDf = getData.setIndex(hourSymbolDf)
         multiCryptoDict[key] = hourIndexDf
     multiDf = pd.concat(list(multiCryptoDict.values())).sort_index()
-    # print(multiDf)
+    print(multiDf)
     # save the chart
     dataCoin1 = multiDf.loc[:, pd.IndexSlice['btc'], :]
     dataCoin2 = multiDf.loc[:, pd.IndexSlice['eth'], :]
@@ -60,8 +59,7 @@ if __name__ == '__main__':
     def cal_pctChange(data, lastTime, periodList=[1]):
         pctChangeDict = {}
         for period in periodList:
-            pctChangeDict['Week'+str(period)] = str(round((data.loc[lastTime-timedelta(hours=(6*(period-1))*24)]/data.loc[lastTime-timedelta(hours=(6*period)*24)]-1)*100, 2))+'%'
-        pctChangeDict['monthly'] = str(round((data.loc[lastTime]/data.loc[lastTime-timedelta(hours=(6*4)*24)]-1)*100, 2))+'%'
+            pctChangeDict['weeklyPctChange'] = str(round((data.loc[lastTime-timedelta(hours=(6*(period-1))*24)]/data.loc[lastTime-timedelta(hours=(6*period)*24)]-1)*100, 2))+'%'
         pctChangeDf = pd.Series(pctChangeDict)
         return pctChangeDf
     lastTime = dataCoin1.index[-1]
@@ -74,3 +72,5 @@ if __name__ == '__main__':
     pctChangeDfT = pctChangeDf.T
     print(pctChangeDfT)
     pctChangeDfT.to_excel('PricePctChange.xlsx')
+
+

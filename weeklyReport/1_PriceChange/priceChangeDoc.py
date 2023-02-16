@@ -4,7 +4,7 @@ from docx.shared import Inches
 import pandas as pd
 from docx.enum.style import WD_STYLE_TYPE
 
-os.system("python ./priceAutoCode.py 2023-01-27 2023-02-03")
+os.system("python ./priceAutoCode.py 2023-01-24 2023-02-03")
 
 document = Document()
 styles = document.styles
