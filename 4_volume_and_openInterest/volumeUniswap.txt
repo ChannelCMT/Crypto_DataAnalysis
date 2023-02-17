@@ -1,0 +1,25 @@
+
+**UNISWAP**
+* Doc: https://docs.uniswap.org/api/subgraph/guides/examples#historical-global-data
+* Subgraph: https://thegraph.com/hosted-service/subgraph/uniswap/uniswap-v3
+
+`
+ {
+   poolDayDatas(first: 10, orderBy: date, where: {
+     pool: "0x1d42064fc4beb5f8aaf85f4617ae8b3b5b8bd801",
+     date_gt: 1633642435
+   } ) {
+     date
+     liquidity
+     sqrtPrice
+     token0Price
+     token1Price
+     volumeToken0
+     volumeToken1
+   }
+ }
+`
+***
+
+
+**Binance**
